@@ -1,0 +1,76 @@
+# request Script:
+
+{
+    "firstname" : "{{firstname}}",
+    "lastname" : "{{lastname}}",
+    "totalprice" : 111,
+    "depositpaid" : true,
+    "bookingdates" : {
+        "checkin" : "{{checkin}}",
+        "checkout" : "{{checkout}}"
+    },
+    "additionalneeds" : "Breakfast"
+}
+
+#Pre-request script :
+
+var firstname = pm.variables.replaceIn("{{$randomFirstName}}")
+console.log("First Name: " +firstname)
+pm.environment.set("firstname",firstname)
+
+
+var lastname = pm.variables.replaceIn("{{$randomLastName}}")
+console.log("Last Name: " +lastname)
+pm.environment.set("lastname",lastname)
+
+
+//date generate:
+const moment = require('moment')
+const today = moment()
+
+//formatting date
+console.log("Date: ", today.format("YYYY.MM.DD"))
+
+//4days later:
+console.log("Date: ", today.add(4, 'day').format("YYYY.MM.DD"))
+
+//environment check
+
+pm.environment.set("checkin", today.format("YYYY.MM.DD"))
+pm.environment.set("checkout", today.add(4, 'day').format("YYYY.MM.DD"))
+
+# Test_data:
+
+var jsondata = JSON.parse(responseBody);
+postman.setEnvironmentVariable("bookingid",jsondata.bookingid);
+
+
+
+
+pm.test("Status pass", function () {
+    pm.response.to.have.status(200);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
