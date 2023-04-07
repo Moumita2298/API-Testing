@@ -1,0 +1,22 @@
+var jsondata = pm.response.json();
+
+//pm.test("First Name Validation", function(){
+   // pm.expect(jsonData.firstname).to.eql(pm.environment.get("firstname"));
+//});
+
+//Validation for firstname:
+pm.test("First name Validation" , function(){
+    pm.expect(jsondata.firstname).to.eql(pm.environment.get("firstname"));
+
+})
+ 
+pm.test("Status pass", function () {
+    pm.response.to.have.status(200);
+});
+
+//Validation for checkin-checkout:
+
+// pm.test("Check In Validation" , function(){
+//     pm.expect(jsondata.bookingdates.checkin).to.eql(pm.environment.get("checkin"));
+
+// })
